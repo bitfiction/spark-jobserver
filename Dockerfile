@@ -7,7 +7,6 @@ FROM openjdk:8-jdk-alpine AS build
 ARG SBT_VERSION=1.2.8
 ARG SCALA_VERSION=2.11.8
 ARG SPARK_VERSION=2.4.5
-ARG HADOOP_VERSION=2.7
 
 # Install dependencies
 RUN apk add --no-cache bash curl
@@ -21,7 +20,7 @@ RUN mkdir -p /tmp/spark && \
     mkdir -p /tmp/sparkjobserver
 
 # Install spark
-RUN curl -L -o /tmp/spark.tgz http://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz && \
+RUN curl -L -o /tmp/spark.tgz http://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-without-hadoop.tgz && \
     tar -xvzf /tmp/spark.tgz -C /tmp/spark --strip-components 1
 
 # Build jobserver
